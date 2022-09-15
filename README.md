@@ -82,6 +82,9 @@ export default {
         host: "smtp.example.com",
         port: 587,
       },
+      json: {
+        limit: "100mb"
+      },
     }],
   ],
   // or use the top-level option:
@@ -93,11 +96,16 @@ export default {
       host: "smtp.example.com",
       port: 587,
     },
+    json: {
+        limit: "100mb"
+    }
   },
 }
 ```
 
 The `smtp` options are required and directly passed to [nodemailer](https://nodemailer.com/smtp/). Refer to their documentation for available options. Also, you have to pass at least `to`, `cc` or `bcc` via the `message` config. This has security reasons, this way the client cannot send emails from your SMTP server to arbitrary recipients. You can actually preconfigure the message via the `message` config, so if you always want to send emails with the same subject or from address, you can configure them here.
+
+The `json` option is optional and directly passed to [express.json()](https://expressjs.com/fr/api.html#express.json). With this you can change the request size body limit for exemple.
 
 The module injects the `$mail` variable, which we now use to send emails:
 

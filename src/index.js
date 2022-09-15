@@ -24,7 +24,7 @@ export default function (moduleOptions) {
   const app = express()
 
   const transport = nodemailer.createTransport(options.smtp)
-  app.use(express.json())
+  app.use(express.json(options.json || {}))
   app.post('/send', async (req, res) => {
     req.body = { config: 0, ...req.body }
     try {
